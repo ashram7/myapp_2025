@@ -1,14 +1,10 @@
 let express = require("express");
-//cors 정책해결
-let cors = require("cors");
 // axios 모듈을 사용하기 위한 선언
 let axios = require("axios");
 
 let app = express();
 let port = process.env.PORT || 80;
 
-// CORS 미들웨어 전역 설정
-app.use(cors());
 app.use(express.static("public_html"));
 app.listen(port, function(){
     console.log("HTML 서버 시작됨");
@@ -44,11 +40,9 @@ app.get("/pharmach_list", (req, res) => {
                     "numOfRows" : req.query.numOfRows
                 }
             });
-            res.json(response.data.response.body);
         }
         catch(e) {
-            console.error(e);
-            res.status(500).send("Internal Server Error");
+            console.lgo(e);
         }
         return response;
     }
