@@ -44,9 +44,11 @@ app.get("/pharmach_list", (req, res) => {
                     "numOfRows" : req.query.numOfRows
                 }
             });
+            res.json(response.data.response.body);
         }
         catch(e) {
-            console.lgo(e);
+            console.error(e);
+            res.status(500).send("Internal Server Error");
         }
         return response;
     }
