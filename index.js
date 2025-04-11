@@ -5,7 +5,11 @@ let axios = require("axios");
 let app = express();
 let port = process.env.PORT || 80;
 
-app.use(express.static("public_html"));
+//app.use(express.static("public_html"));
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+});
 app.listen(port, function(){
     console.log("HTML 서버 시작됨");
 });
@@ -52,4 +56,9 @@ app.get("/pharmach_list", (req, res) => {
         res.setHeader("Access-Control-Allow-Origin", "*");
         res.json(response.data.response.body);
     });        
+});
+
+// index02.html에 접근 가능하도록 라우팅 추가
+app.get("/index02", (req, res) => {
+    res.sendFile(__dirname + "/public_html/index02.html");
 });
